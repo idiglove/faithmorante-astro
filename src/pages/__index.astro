@@ -1,0 +1,134 @@
+---
+import "./../globals.scss"
+import CaretDown from "./../components/CaretDown.astro"
+import CaretUp from "./../components/CaretUp.astro"
+---
+
+<div class="home-wrapper">
+  <video autoplay muted loop id="myVideo" src="abstract-blue-video.mp4"></video>
+  <h1>
+    Hi! <br /> I'm Faith Morante!
+    <br />I like making things happen.
+    <br />
+    <br />
+    I'm a Software Engineer <br />
+    since 2015.
+    <br />
+    <br />I blog, paint and make games among many things.
+    <br />
+    <br />
+    Hire me. <br />
+    Or join my Discord for free mentorship.
+  </h1>
+  <!-- <img src={CaretDown} alt="down arrow" />; -->
+  <CaretDown className="arrow-down" />
+  <CaretUp className="arrow-up" />
+</div>
+
+<script>
+  const heading = document.getElementsByTagName("h1")?.[0]
+  const arrowDown =
+    (document.querySelector(".arrow-down") as HTMLElement) ?? null
+  const arrowUp = (document.querySelector(".arrow-up") as HTMLElement) ?? null
+
+  // initial settings
+  arrowUp.style.display = "none"
+  let arrowClass = ".arrow-down"
+
+  const arrow = (className: string | null) => {
+    return document.querySelector(className ?? arrowClass)
+  }
+
+  const doScroll = () => {
+    const scrollNum = arrowClass === ".arrow-down" ? 100 : -100
+    heading?.scrollBy(0, scrollNum)
+  }
+
+  const toggleArrow = () => {
+    const el = heading ?? null
+    const scrollHeight = el?.scrollHeight ?? 0
+    const scrollTop = el?.scrollTop ?? 0
+
+    // if I get to the bottom
+    if (scrollHeight - scrollTop === el?.clientHeight) {
+      arrowDown ? (arrowDown.style.display = "none") : null
+      arrowUp ? (arrowUp.style.display = "block") : null
+      arrowClass = '.arrow-up'
+    }
+
+    // if I get to the top
+    if (scrollTop === 0) {
+      arrowUp ? (arrowUp.style.display = "none") : null
+      arrowDown ? (arrowDown.style.display = "block") : null
+      arrowClass = '.arrow-down'
+    }
+  }
+
+  arrow('.arrow-down')?.addEventListener("click", () => {
+    doScroll()
+    toggleArrow()
+  })
+  arrow('.arrow-up')?.addEventListener("click", () => {
+    doScroll()
+    toggleArrow()
+  })
+</script>
+
+<style is:global>
+  /* All Global styles are here */
+  body {
+    margin: 0;
+  }
+</style>
+
+<style lang="scss">
+  .home-wrapper {
+    font-family: "DosisRegular", sans-serif;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+    }
+
+    h1 {
+      position: relative;
+      display: block;
+      align-self: center;
+      color: white;
+      overflow-y: scroll;
+      font-size: 3.5rem;
+      margin: 0 2rem;
+      max-height: 350px;
+      max-width: 1024px;
+
+      @media only screen and (min-width: 1024px) {
+        font-size: 6rem;
+        margin: 0 auto;
+        /* margin: 0 10rem; */
+        /* max-height: 350px; */
+      }
+
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+    }
+    svg {
+      position: relative;
+      width: 10rem;
+      height: 10rem;
+      cursor: pointer;
+    }
+  }
+</style>
