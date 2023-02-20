@@ -1,11 +1,9 @@
 ---
 import "./../globals.scss"
 import Page from "./../components/Page"
+import Layout from "../layout/layout.astro";
 ---
 
-<html>
-  <head><title>Faith Morante - Software Engineer</title></head>
-  <body>
-    <Page />
-  </body>
-</html>
+<Layout>
+  <Page client:load />
+</Layout>

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import CaretDown from "./CaretDown"
 import CaretUp from "./CaretUp"
 import styles from "./../styles/home.module.scss"
-// import './../styles/home.scss'
+import AbstractVideo from './../assets/abstract-blue-video.mp4'
 
-export default function Page({video}) {
+export default function Page() {
   const [showArrowDown, setShowArrowDown] = useState(true)
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function Page({video}) {
         muted
         loop
         id="myVideo"
-        src="/public/assets/abstract-blue-video.mp4"
+        src={AbstractVideo}
       ></video>
       <h1>
         Hi! <br /> I'm Faith Morante!
