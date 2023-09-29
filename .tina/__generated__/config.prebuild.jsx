@@ -1,21 +1,21 @@
+// .tina/config.ts
 import { defineConfig } from "tinacms";
-
-// Your hosting provider likely exposes this as an environment variable
-const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
-
-export default defineConfig({
+var branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
+var config_default = defineConfig({
   branch,
-  clientId: "3a123d43-5d27-473a-8481-8037ef08597d", // Get this from tina.io
-  token: "498a48d88a876dd75fa9ae2565fd1f79240931cf", // Get this from tina.io
+  clientId: "3a123d43-5d27-473a-8481-8037ef08597d",
+  // Get this from tina.io
+  token: "498a48d88a876dd75fa9ae2565fd1f79240931cf",
+  // Get this from tina.io
   build: {
     outputFolder: "admin",
-    publicFolder: "public",
+    publicFolder: "public"
   },
   media: {
     tina: {
       mediaRoot: "",
-      publicFolder: "public",
-    },
+      publicFolder: "public"
+    }
   },
   schema: {
     collections: [
@@ -29,16 +29,19 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
-      },
-    ],
-  },
+            isBody: true
+          }
+        ]
+      }
+    ]
+  }
 });
+export {
+  config_default as default
+};
